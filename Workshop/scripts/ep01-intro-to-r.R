@@ -259,24 +259,24 @@ class(decimal_number)
 # [Hint: use class() to check the data type of your objects]
 #
 # Can you explain why you think it happens?
-
+# It will convert to the lowest common type that is capable of representing all the values
 # --------
 # Exercise
 # --------
 # How many values in combined_logical are "TRUE" (ie character 4 characters)
 # in the following example:
 #   
-#   num_logical <- c(1, 2, 3, TRUE)
-#   char_logical <- c("a", "b", "c", TRUE)
-#   combined_logical <- c(num_logical, char_logical)
-
+  num_logical <- c(1, 2, 3, TRUE)
+  char_logical <- c("a", "b", "c", TRUE)
+  combined_logical <- c(num_logical, char_logical)
+combined_logical
 
 #
 # Topic: Subsetting vectors
 # Presented by: Evan Matthews
 
 animals <- c("mouse", "rat", "dog", "cat")
-animals[2]
+animals[2]                  # Square brackets tell R which item in the vector you want
 animals[c(3, 2)]
 
 more_animals <- animals[c(1, 2, 3, 2, 1, 4)]
@@ -286,8 +286,8 @@ more_animals
 weight_g <- c(21,   34,    39,   54,   55)
 weight_g[   c(TRUE, FALSE, TRUE, TRUE, FALSE)]
 
-weight_g > 50
-weight_g[weight_g > 50]
+weight_g > 50                # Returns true false
+weight_g[weight_g > 50]      # Returns actual values
 
 weight_g[weight_g < 30 | weight_g > 50]
 
@@ -296,19 +296,19 @@ weight_g[weight_g >= 30 & weight_g == 21]
 animals <- c("mouse", "rat", "dog", "cat")
 animals[animals == "cat" | animals == "rat"] # returns both rat and cat
 
-animals %in% c("rat", "cat", "dog", "duck", "goat")
+animals %in% c("rat", "cat", "dog", "duck", "goat")      #Looks for these values in the animals vector
 animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 
 # Challenge
 #
 # Can you explain  why 
 #
-#  "four" > "five" 
+ "four" > "five"
 #
 # returns TRUE?
 #
 # Answer:
-
+# Alphabetically "four" is higher than "five"
 
 # Topic: Missing data (NA - Not Available)
 
@@ -319,7 +319,7 @@ mean(heights, na.rm = TRUE)
 max(heights, na.rm = TRUE)
 
 heights[!is.na(heights)]
-na.omit(heights)
+na.omit(heights)           # this does the same thing as previous command
 heights[complete.cases(heights)]
 
 #
@@ -329,15 +329,24 @@ heights[complete.cases(heights)]
 # Using this vector of heights in inches, create a new vector 
 # with the NAs removed.
 # 
-#   heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+  heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+  new_heights <- heights[!is.na(heights)]
+  new_heights
+  
 #
 # Solution
 
 # Use the function median() to calculate the median of the heights vector.
 #
 # Solution
-
+median(new_heights)
+  
 # Use R to figure out how many people in the set are taller than 67 inches.
 #
 # [Hint: R has a builtin function called length() that tells you 
 # how many values are in a vector
+
+
+over_67 <-new_heights [new_heights > 67]
+length(over_67)
+
