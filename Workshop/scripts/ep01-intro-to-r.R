@@ -160,7 +160,7 @@ m = cms / 100
 #
 sqrt(2)
 sqrt(a)
-abs(-23.3)
+abs(-23.3)      # abs means absolute value
 round(3.14159)
 pi
 
@@ -177,8 +177,8 @@ round(digits = 2, x = 3.14159)
 # what does the function called log10() do ?  Can you test it ?
 #
 # Answer:
-
-
+?log10()
+log10(2)
 
 #
 # Topic: Vectors and Data Types
