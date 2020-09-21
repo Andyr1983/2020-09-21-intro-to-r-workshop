@@ -13,14 +13,14 @@
 
 # Lets download some data (make sure the data folder exists)
 download.file(url = "https://ndownloader.figshare.com/files/2292169",
-              destfile = "data_raw/portal_data_joined.csv")
+              destfile = "data_raw/portal_data_joined.csv")     #destination file
 
 # now we will read this "csv" into an R object called "surveys"
 surveys <- read.csv("data_raw/portal_data_joined.csv")
 
 # and take a look at it
-view(surveys)
-
+View(surveys)    # Needs a capital letter because View is only for R Studio
+head(surveys)
 
 # BTW, we assumed our data was comma separated, however this might not
 # always be the case. So we may been to tell read.csv more about our file.
@@ -32,8 +32,8 @@ class(surveys)
 
 
 # ok - so what are dataframes ?
-
-
+# a series of vectors 
+str(surveys)   # tells you what type each variable is
 
 # --------
 # Exercise
@@ -48,17 +48,18 @@ class(surveys)
 #
 # Answer: 13
 ncol(surveys)
+str(surveys)
 # What's the average weight of survey animals
 #
 #
 # Answer: 42.67
 mean(surveys$weight, na.rm = TRUE)
 # Are there more Birds than Rodents ?
-#
+
 #
 # Answer:
-surveys$taxa
-frequency(surveys$taxa == "Rodent")
+
+
 # 
 # Topic: Sub-setting
 #
