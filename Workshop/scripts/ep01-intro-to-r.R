@@ -136,7 +136,7 @@ weight_kg
 
 #
 # Topic: Comments
-#
+# ctrl + shift + c will toggle comments on and off.
 
 # Comments (like this one) are usually helpful
 
