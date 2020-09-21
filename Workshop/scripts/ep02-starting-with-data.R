@@ -19,7 +19,7 @@ download.file(url = "https://ndownloader.figshare.com/files/2292169",
 surveys <- read.csv("data_raw/portal_data_joined.csv")
 
 # and take a look at it
-
+view(surveys)
 
 
 # BTW, we assumed our data was comma separated, however this might not
@@ -28,7 +28,7 @@ surveys <- read.csv("data_raw/portal_data_joined.csv")
 
 
 # So what kind of an R object is "surveys" ?
-
+class(surveys)
 
 
 # ok - so what are dataframes ?
@@ -41,24 +41,24 @@ surveys <- read.csv("data_raw/portal_data_joined.csv")
 #
 # What is the class of the object surveys?
 #
-# Answer:
+# Answer: Dataframe
 
 
 # How many rows and how many columns are in this survey ?
 #
-# Answer:
-
+# Answer: 13
+ncol(surveys)
 # What's the average weight of survey animals
 #
 #
-# Answer:
-
+# Answer: 42.67
+mean(surveys$weight, na.rm = TRUE)
 # Are there more Birds than Rodents ?
 #
 #
 # Answer:
-
-
+surveys$taxa
+frequency(surveys$taxa == "Rodent")
 # 
 # Topic: Sub-setting
 #
