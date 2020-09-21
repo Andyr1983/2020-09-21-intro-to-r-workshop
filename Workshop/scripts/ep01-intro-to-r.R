@@ -350,3 +350,5 @@ median(new_heights)
 over_67 <-new_heights [new_heights > 67]
 length(over_67)
 
+?sort
+sort(over_67, decreasing = FALSE)
