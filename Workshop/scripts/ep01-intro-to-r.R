@@ -178,7 +178,7 @@ round(digits = 2, x = 3.14159)
 #
 # Answer:
 ?log10()
-log10(2)
+log10(10)
 
 #
 # Topic: Vectors and Data Types
