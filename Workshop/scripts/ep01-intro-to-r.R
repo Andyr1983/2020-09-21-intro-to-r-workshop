@@ -184,7 +184,7 @@ log10(10)
 # Topic: Vectors and Data Types
 # Presented by: Richard Miller
 
-# Combine some values in a vector
+# Combine some values in a vector - a vector must contain the same type of data
 glengths <- c(4.6, 3000, 50000)
 glengths
 
@@ -194,9 +194,9 @@ species
 length(glengths)
 length(species)
 
-5 * glengths
+5 * glengths      # this will multiply all things in glengths by 5.
 
-double_lengths <- glengths + glengths
+double_lengths <- glengths + glengths   # this will double all values in glengths
 double_lengths
 
 class(glengths)
@@ -238,16 +238,23 @@ class(decimal_number)
 #
 # eg:
 #
-#   thing <- c("some characters", 3.141, 100, TRUE)
-#   thing
-#   class(thing)
+  thing <- c("some characters", 3.141, 100, TRUE)
+  thing
+  class(thing)
 #
 # What will happen in each of these examples?
 #
-#   num_char <- c(1, 2, 3, "a")
-#   num_logical <- c(1, 2, 3, TRUE)
-#   char_logical <- c("a", "b", "c", TRUE)
-#   tricky <- c(1, 2, 3, "4")
+  num_char <- c(1, 2, 3, "a")
+  num_logical <- c(1, 2, 3, TRUE)
+  char_logical <- c("a", "b", "c", TRUE)
+  tricky <- c(1, 2, 3, "4")
+  
+  class(num_char)
+  class(num_logical)
+  class(char_logical)
+  class(tricky)
+  str(num_logical)
+  
 #
 # [Hint: use class() to check the data type of your objects]
 #
