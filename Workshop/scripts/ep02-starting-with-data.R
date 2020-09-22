@@ -153,10 +153,17 @@ nlevels(gender)
 
 # factors have an order
 temperature <- factor(c("hot", "cold", "hot", "warm"))
-temperature[1]
 # this will code them in alphabetical order
+temperature[1]
+levels(temperature)
+temperature <- factor(c("hot", "cold", "hot", "warm"), 
+                      levels = c("cold", "warm", "hot"))  
+# this will code them in a certain order
+levels(temperature)
+
 
 # Converting factors
+
 
 
 # can be tricky if the levels are numbers
