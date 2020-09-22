@@ -176,22 +176,38 @@ as.numeric(as.character(year))
 
 # so does our survey data have any factors
 
+str(surveys)
 
+levels(surveys$taxa)
+surveys$taxa
 #
 # Topic:  Dealing with Dates
 #
 
 # R has a whole library for dealing with dates ...
+library(lubridate)
 
-
+my_date <- ymd("2015-01-01")
+class(my_date)
 
 # R can concatenated things together using paste()
+paste("abc", "123")
+paste("abc", "123", sep="-")
+paste("2015", "01", "26", sep="-")
+my_date <- ymd( paste("2015", "01", "26", sep="-"))
+class(my_date)
 
 
 # 'sep' indicates the character to use to separate each component
 
 
 # paste() also works for entire columns
+surveys$date <- ymd(paste(surveys$year, 
+                          surveys$month, 
+                          surveys$day, 
+                          sep = "-"))
+
+surveys$date
 
 
 # let's save the dates in a new column of our dataframe surveys$date 
