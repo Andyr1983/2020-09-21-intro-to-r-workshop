@@ -85,53 +85,76 @@ surveys[1,6]
 surveys[,1]
 
 # first column of the data frame (as a data frame)
-
+surveys[1]          # only use one number
+head(surveys[1])
 
 # first row (as a data frame)
-
+surveys[1, ]   #This can't be a vector because the data-types are different across columns
 
 # first three elements in the 7th column (as a vector)
-
+surveys[1:3, 7]
 
 # the 3rd row of the data frame (as a data.frame)
+surveys[3, ]
 
-
-# equivalent to head(metadata)
-
+# equivalent to head(surveys)
+head(surveys)
+surveys[1:6, ]
 
 # looking at the 1:6 more closely
+1:6
+surveys[c(1,2,3,4,5,6), ]
 
 
 # we also use other objects to specify the range
-
+rows <- 6
+surveys[1:rows, 3]
 
 
 #
 # Challenge: Using slicing, see if you can produce the same result as:
 #
-#   tail(surveys)
+  tail(surveys)
 #
 # i.e., print just last 6 rows of the surveys dataframe
 #
 # Solution:
+surveys[34781:34786, ]
 
+surveys[(nrow(surveys)-5):nrow(surveys),]
+
+end <- nrow(surveys)
+surveys[(end -5):end),]
 
 
 # We can omit (leave out) columns using '-'
-
+surveys[-1]               #Remove column 1
+surveys[c(-1, -2, -3)]    #Remove columns 1, 2, and 3
+surveys[c(-1:-6)]
+surveys[ -(1:3)]
 
 
 # column "names" can be used in place of the column numbers
-
-
+head(surveys)
+surveys[c("month", "year")]
 
 #
 # Topic: Factors (for categorical data)
 #
 
+gender <- c("male", "female", "female")
+View(gender)
+
+gender <- factor(c("male", "female", "female"))
+gender
+class(gender)
+levels(gender)
+nlevels(gender)
 
 # factors have an order
-
+temperature <- factor(c("hot", "cold", "hot", "warm"))
+temperature[1]
+# this will code them in alphabetical order
 
 # Converting factors
 
