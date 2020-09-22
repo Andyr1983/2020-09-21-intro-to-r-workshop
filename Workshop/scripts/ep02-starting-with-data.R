@@ -163,11 +163,16 @@ levels(temperature)
 
 
 # Converting factors
-
-
+as.numeric(temperature)
+as.character(temperature)
 
 # can be tricky if the levels are numbers
+year <- factor(c(1990, 1992, 1993, 1995, 1996, 1995))
+year
 
+as.numeric(year)
+as.character(year)
+as.numeric(as.character(year))
 
 # so does our survey data have any factors
 
