@@ -21,6 +21,8 @@ surveys <- read.csv("data_raw/portal_data_joined.csv")
 # and take a look at it
 View(surveys)    # Needs a capital letter because View is only for R Studio
 head(surveys)
+head(surveys,2)
+tail(surveys)
 
 # BTW, we assumed our data was comma separated, however this might not
 # always be the case. So we may been to tell read.csv more about our file.
@@ -34,6 +36,11 @@ class(surveys)
 # ok - so what are dataframes ?
 # a series of vectors 
 str(surveys)   # tells you what type each variable is
+dim(surveys)   #tells you number of rows and columns
+
+
+names(surveys) #Gives you the names of all columns
+row.names(surveys)
 
 # --------
 # Exercise
@@ -54,8 +61,12 @@ str(surveys)
 #
 # Answer: 42.67
 mean(surveys$weight, na.rm = TRUE)
-# Are there more Birds than Rodents ?
+summary(surveys)
 
+# Are there more Birds than Rodents ?
+summary(surveys)
+
+sum(surveys$taxa == "Rodent")
 #
 # Answer:
 
@@ -65,13 +76,13 @@ mean(surveys$weight, na.rm = TRUE)
 #
 
 # first element in the first column of the data frame (as a vector)
-
+surveys[1,1]
 
 # first element in the 6th column (as a vector)
-
+surveys[1,6]
 
 # first column of the data frame (as a vector)
-
+surveys[,1]
 
 # first column of the data frame (as a data frame)
 
