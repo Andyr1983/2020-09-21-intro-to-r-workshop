@@ -214,8 +214,18 @@ surveys$date
 
 
 # and ask summary() to summarise 
-
+summary(surveys)
 
 # but what about the "Warning: 129 failed to parse"
+# some data couldn't be converted
+
+summary(surveys$date)
 
 
+missing <-surveys[is.na(surveys$date), "date"]
+missing
+
+missing <-surveys[is.na(surveys$date), c("date", "year", "month", "day")]
+missing
+
+#all these missing dates are from months which don't have 31 days
