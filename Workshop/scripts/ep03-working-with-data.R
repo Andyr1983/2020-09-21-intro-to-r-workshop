@@ -89,7 +89,9 @@ surveys_sml <- surveys %>%
 # Using pipes, subset the ```surveys``` data to include animals collected before 1995 and 
 # retain only the columns ```year```, ```sex```, and ```weight```.
 
-
+animals_1995 <- surveys %>% 
+  filter(year < 1995) %>% 
+  select(year, sex, weight)
 
 
 
