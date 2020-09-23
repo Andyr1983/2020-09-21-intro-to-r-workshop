@@ -49,17 +49,37 @@ select(surveys, plot_id, species_id, weight)
 
 # select can be used with a minus sign to return everything but that column
 select(surveys, -record_id)
+# select is used for columns
 
+# filter for a particular year - use the ==
+filter(surveys, year == 1995)
+# filter is used for rows
 
+surveys_1995 <- filter(surveys, year == 1995)
 
 
 #-------
 # Pipes
 #-------
+# pipes are %>%
+# shortcut is ctrl + shift + m
+
+surveys2 <-  filter(surveys, weight < 5)
+surveys_sml <- select(surveys2, species_id, sex, weight)
+
+surveys_sml <- select(filter(surveys, weight < 5), species_id, sex, weight)
 
 
+# this is a better way to do the above
+surveys %>% 
+  filter(weight < 5) %>% 
+  select(species_id, sex, weight)
+# doing it with pipes you don't need to include the "surveys" in each bracket
 
 
+surveys_sml <- surveys %>% 
+  filter(weight < 5) %>% 
+  select(species_id, sex, weight)
 
 
 #-----------
