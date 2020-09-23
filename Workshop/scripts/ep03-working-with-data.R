@@ -31,18 +31,24 @@ download.file(url = "https://ndownloader.figshare.com/files/2292169",
 #------------------
 # Lets get started!
 #------------------
+install.packages("tidyverse")
+library(tidyverse)
+# tidyverse includes dplyr and tidyr
 
+# load the dataset
+surveys <- read_csv("data_raw/portal_data_joined.csv")
 
-
-
-
+# check structure
+str(surveys)
+class(surveys)
 
 #-----------------------------------
 # Selecting columns & filtering rows
 #-----------------------------------
+select(surveys, plot_id, species_id, weight)
 
-
-
+# select can be used with a minus sign to return everything but that column
+select(surveys, -record_id)
 
 
 
