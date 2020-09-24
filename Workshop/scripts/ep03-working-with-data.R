@@ -168,13 +168,21 @@ surveys %>%
   summarise(mean_weight = mean(weight)) %>% 
   print(n = 20)
 
-# min and max
+# can do multiple summarise commands and arrange by which ever you choose
 surveys %>% 
   filter(!is.na(weight), !is.na(sex)) %>% 
   group_by(sex, species_id) %>% 
   summarise(mean_weight = mean(weight),
             min_weight = min(weight)) %>%
   arrange(min_weight)
+
+# can arrange descending
+surveys %>% 
+  filter(!is.na(weight), !is.na(sex)) %>% 
+  group_by(sex, species_id) %>% 
+  summarise(mean_weight = mean(weight),
+            min_weight = min(weight)) %>%
+  arrange(desc(min_weight))
 
 
 #-----------
@@ -191,12 +199,32 @@ num_animals <- surveys %>%
 #    for each species (using ```species_id```). Also add the number of observations 
 #    (hint: see ```?n```).
 
-
+hindfoot_info <- surveys %>%
+  filter(!is.na(hindfoot_length)) %>% 
+  group_by(species_id) %>% 
+  summarise(mean_length = mean(hindfoot_length),
+            min_length = min(hindfoot_length), 
+            max_length = max(hindfoot_length),
+            count = n())
 
 
 # 3. What was the heaviest animal measured in each year? 
 #    Return the columns ```year```, ```genus```, ```species_id```, and ```weight```.
 
+# Need to use mutate to create a new column because summarise makes the rest disappear 
+heaviest_year <- surveys %>%
+  group_by(year) %>%
+  select(year, genus, species_id, weight) %>%  
+  mutate(max_weight = max(weight, na.rm= TRUE)) %>% 
+  ungroup()
+
+# Or you can filter by max weight instead
+surveys %>%
+  filter(!is.na(weight)) %>%
+  group_by(year) %>%
+  filter(weight == max(weight)) %>%
+  select(year, genus, species, weight) %>%
+  arrange(year)
 
 
 
