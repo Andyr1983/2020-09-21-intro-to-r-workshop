@@ -213,19 +213,19 @@ hindfoot_info <- surveys %>%
 
 # Need to use mutate to create a new column because summarise makes the rest disappear 
 heaviest_year <- surveys %>%
-  group_by(year) %>%
   select(year, genus, species_id, weight) %>%  
+  group_by(year) %>% 
   mutate(max_weight = max(weight, na.rm= TRUE)) %>% 
   ungroup()
 
 # Or you can filter by max weight instead
-surveys %>%
+heaviest_year <- surveys %>% 
   filter(!is.na(weight)) %>%
   group_by(year) %>%
-  filter(weight == max(weight)) %>%
+  filter(weight == max(weight)) %>% 
   select(year, genus, species, weight) %>%
-  arrange(year)
-
+  arrange(year) %>% 
+  distinct()
 
 
 
@@ -233,8 +233,24 @@ surveys %>%
 # Reshaping
 #-----------
 
+surveys_gw <- surveys %>% 
+  filter(!is.na(weight)) %>% 
+  group_by(plot_id, genus) %>% 
+  summarise(mean_weight = mean(weight))
+
+# pivot wider and pivot longer are not installed in this version of tidyverse
+surveys_spread <- surveys_gw %>% 
+  pivot_wider(!plot_id, names_from = genus, values_from = mean_weight)
 
 
+
+# to go from long to wide format
+surveys_spread <- surveys_gw %>% 
+  spread(key = genus, value = mean_weight)
+
+# to go from wide to long (minus plot_id to keep that as a varable)
+surveys_gather <- surveys_spread %>% 
+  gather(key = genus, value = mean_weight, - plot_id)
 
 
 
@@ -248,7 +264,19 @@ surveys %>%
 #    and use the function n_distinct() to get the number of unique genera within a particular chunk of data. 
 #    It’s a powerful function! See ?n_distinct for more.
 
+
+challenge1 <- surveys %>% 
+  group_by(plot_id, year) %>% 
+  summarise(num_per_plot = n_distinct(genus)) %>% 
+  spread(key = year, value = num_per_plot)
+
+
+
+
 # 2. Now take that data frame and pivot_longer() it again, so each row is a unique plot_id by year combination.
+
+challenge2 <- challenge1 %>% 
+  gather(key = year, value = num_per_plot, -plot_id)
 
 # 3. The surveys data set has two measurement columns: hindfoot_length and weight. 
 #    This makes it difficult to do things like look at the relationship between mean values of each 
@@ -257,11 +285,17 @@ surveys %>%
 #    takes on the value of either hindfoot_length or weight. 
 #    Hint: You’ll need to specify which columns are being pivoted.
 
+challenge3 <- surveys %>% 
+  gather(key = measurement, value = hindfoot_length, weight)
+
 # 4. With this new data set, calculate the average of each measurement in each year for each different plot_type. 
 #    Then pivot_wider() them into a data set with a column for hindfoot_length and weight. 
 #    Hint: You only need to specify the key and value columns for pivot_wider().
 
-
+challenge4 <- challenge3 %>% 
+  group_by(year, measurement, plot_type) %>% 
+  summarise(mean_value = mean(measurement, na.rm=TRUE)) %>% 
+  spread(key=measurement, value=mean_value)
 
 
 
