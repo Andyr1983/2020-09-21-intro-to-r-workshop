@@ -238,15 +238,19 @@ surveys_gw <- surveys %>%
   group_by(plot_id, genus) %>% 
   summarise(mean_weight = mean(weight))
 
-#----
-# pivot wider and pivot longer are not installed in this version of tidyverse
-surveys_spread <- surveys_gw %>% 
+#-----------------------
+# Pivot wider and longer
+
+# pivot wider
+surveys_wide <- surveys_gw %>% 
   pivot_wider(names_from = genus, values_from = mean_weight)
 
-# 
-surveys_gather <- surveys_gw %>% 
+#  pivot longer
+surveys_long <- surveys_gw %>% 
   pivot_longer(!plot_id, names_to = "genus", values_to = "mean_weight")
-#####
+
+#------------------
+# spread and gather
 
 # to go from long to wide format
 surveys_spread <- surveys_gw %>% 
@@ -312,8 +316,12 @@ write_csv(surveys, path = "data_out/surveys.csv")
 
 
 
+#------------------------------
+# Get and set working directory
+#------------------------------
 
-
+getwd()
+setwd("~/FilePath")
 
 
 
