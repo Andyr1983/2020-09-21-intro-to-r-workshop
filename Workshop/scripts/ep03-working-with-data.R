@@ -240,8 +240,11 @@ surveys_gw <- surveys %>%
 
 # pivot wider and pivot longer are not installed in this version of tidyverse
 surveys_spread <- surveys_gw %>% 
-  pivot_wider(!plot_id, names_from = genus, values_from = mean_weight)
+  pivot_wider(names_from = genus, values_from = mean_weight)
 
+
+surveys_gather <- surveys_gw %>% 
+  pivot_longer(names_to = "genus", values_to = "mean_weight")
 
 
 # to go from long to wide format
@@ -286,7 +289,7 @@ challenge2 <- challenge1 %>%
 #    Hint: You’ll need to specify which columns are being pivoted.
 
 challenge3 <- surveys %>% 
-  gather(key = measurement, value = hindfoot_length, weight)
+  gather("measurement", "value", hindfoot_length, weight)
 
 # 4. With this new data set, calculate the average of each measurement in each year for each different plot_type. 
 #    Then pivot_wider() them into a data set with a column for hindfoot_length and weight. 
@@ -304,7 +307,7 @@ challenge4 <- challenge3 %>%
 #----------------
 
 
-
+write_csv(surveys, path = "data_out/surveys.csv")
 
 
 
