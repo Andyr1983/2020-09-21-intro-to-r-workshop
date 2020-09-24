@@ -238,14 +238,15 @@ surveys_gw <- surveys %>%
   group_by(plot_id, genus) %>% 
   summarise(mean_weight = mean(weight))
 
+#----
 # pivot wider and pivot longer are not installed in this version of tidyverse
 surveys_spread <- surveys_gw %>% 
   pivot_wider(names_from = genus, values_from = mean_weight)
 
-
+# 
 surveys_gather <- surveys_gw %>% 
-  pivot_longer(names_to = "genus", values_to = "mean_weight")
-
+  pivot_longer(!plot_id, names_to = "genus", values_to = "mean_weight")
+#####
 
 # to go from long to wide format
 surveys_spread <- surveys_gw %>% 
