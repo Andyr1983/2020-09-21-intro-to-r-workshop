@@ -92,16 +92,32 @@ surveys_sml <- surveys %>%
 animals_1995 <- surveys %>% 
   filter(year < 1995) %>% 
   select(year, sex, weight)
-
+# the order of columns in select will determine the order in the new dataframe
 
 
 #--------
 # Mutate
 #--------
+# this can create a new column but keeping the original column
+
+# "weight_kg" is the new column
+surveys_weight <- surveys %>% 
+  mutate(weight_kg = weight / 1000,
+         weight_lb = weight_kg * 2.2)
+# can mutuate lots of things in the one block of code
+
+# can pipe this and display the headers
+surveys %>% 
+  mutate(weight_kg = weight / 1000,
+         weight_lb = weight_kg * 2.2) %>% 
+  head()
 
 
-
-
+# can filter and then mutate
+surveys %>% 
+  filter(!is.na(weight)) %>% 
+  mutate(weight_kg = weight / 1000) %>% 
+  head()
 
 
 #-----------
@@ -115,8 +131,16 @@ animals_1995 <- surveys %>%
 
 # Hint: think about how the commands should be ordered to produce this data frame!
 
+new_dataframe <- surveys %>% 
+  filter(!is.na(hindfoot_length)) %>% 
+  mutate(hindfoot_cm = hindfoot_length / 10) %>% 
+  select(species_id, hindfoot_cm) %>% 
+  filter(hindfoot_cm < 3)
 
-
+new_dataframe <- surveys %>% 
+  filter(!is.na(hindfoot_length), hindfoot_length < 30) %>% 
+  mutate(hindfoot_cm = hindfoot_length / 10) %>% 
+  select(species_id, hindfoot_cm)
 
 
 #---------------------
