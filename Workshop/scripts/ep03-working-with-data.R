@@ -147,9 +147,34 @@ new_dataframe <- surveys %>%
 # Split-apply-combine
 #---------------------
 
+surveys %>% 
+  group_by(sex) %>% 
+  summarise(mean_weight = mean(weight, na.rm = TRUE))
+
+# can specify which package to use in the case of conflicts
+surveys %>% 
+  dplyr::group_by(sex) %>% 
+  summarise(mean_weight = mean(weight, na.rm = TRUE))
+
+summary(surveys)
+
+surveys$sex <- as.factor(surveys$sex)
 
 
+# can group by multiple things (e.g., sex and species_id)
+surveys %>% 
+  filter(!is.na(weight), !is.na(sex)) %>% 
+  group_by(sex, species_id) %>% 
+  summarise(mean_weight = mean(weight)) %>% 
+  print(n = 20)
 
+# min and max
+surveys %>% 
+  filter(!is.na(weight), !is.na(sex)) %>% 
+  group_by(sex, species_id) %>% 
+  summarise(mean_weight = mean(weight),
+            min_weight = min(weight)) %>%
+  arrange(min_weight)
 
 
 #-----------
@@ -158,9 +183,16 @@ new_dataframe <- surveys %>%
 
 # 1. How many animals were caught in each ```plot_type``` surveyed?
 
+num_animals <- surveys %>% 
+  group_by(plot_type) %>% 
+  summarise(number_of_animals = n())
+
 # 2. Use ```group_by()``` and ```summarize()``` to find the mean, min, and max hindfoot length 
 #    for each species (using ```species_id```). Also add the number of observations 
 #    (hint: see ```?n```).
+
+
+
 
 # 3. What was the heaviest animal measured in each year? 
 #    Return the columns ```year```, ```genus```, ```species_id```, and ```weight```.
