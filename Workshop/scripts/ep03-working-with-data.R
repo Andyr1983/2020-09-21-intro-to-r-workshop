@@ -248,6 +248,10 @@ surveys_wide <- surveys_gw %>%
 #  pivot longer
 surveys_long <- surveys_gw %>% 
   pivot_longer(!plot_id, names_to = "genus", values_to = "mean_weight")
+# names_to is taking the existing column names and putting them into a single
+# column titled "genus".  values_to is taking the values in the existing columns
+# and putting them into a single column titled "mean_weight".
+
 
 #------------------
 # spread and gather
