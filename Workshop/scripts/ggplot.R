@@ -234,8 +234,9 @@ yearly_weight <- surveys_complete %>%
   group_by(year, species) %>% 
   filter(!is.na(weight)) %>% 
   summarise(mean_weight = mean(weight)) %>% 
-  ggplot(mapping = aes(x = year, y = mean_weight, colour = species))+
+  ggplot(mapping = aes(x = year, y = mean_weight))+
   geom_line()+
+  facet_wrap(~species)+
   theme_bw()
 yearly_weight
 
