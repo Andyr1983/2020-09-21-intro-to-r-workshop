@@ -45,6 +45,8 @@ surveys_plot <- ggplot(data = surveys_complete,
   geom_smooth(aes(group = plot_id))
 surveys_plot
 
+#-----------------
+# challenges 1 & 2
 
 # challenge 1
 challenge1 <- ggplot(data = surveys_complete, 
@@ -59,10 +61,32 @@ challenge2 <-  ggplot(data = surveys_complete,
   geom_histogram()
 challenge2
 
+#------------------
+# alpha and colours
 
+ggplot(data = surveys_complete, 
+       mapping = aes(x = weight, y = hindfoot_length)) +
+  geom_point(alpha = 0.1, colour = "blue")
+
+ggplot(data = surveys_complete, 
+       mapping = aes(x = weight, y = hindfoot_length)) +
+  geom_point(alpha = 0.1, aes(colour = species_id))
+
+
+
+#-------------
+# challenges 3
 
 # challenge 3
 challenge3 <- ggplot(data = surveys_complete,
                      mapping = aes(x = species_id, y = weight))+
   geom_jitter(aes(colour = plot_type))
 challenge3
+
+
+# challenge 4
+challenge4 <- ggplot(data = surveys_complete,
+                     mapping = aes(x = species_id, y = weight))+
+  geom_jitter(aes(colour = plot_type, alpha = 0.05)) +
+  geom_boxplot(aes(colour = plot_type))
+challenge4
