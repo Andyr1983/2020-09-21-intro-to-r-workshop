@@ -233,8 +233,11 @@ yearly_sex_counts %>%
 yearly_weight <- surveys_complete %>% 
   group_by(year, species) %>% 
   filter(!is.na(weight)) %>% 
-  summarise(mean_weight = mean(weight))
-
+  summarise(mean_weight = mean(weight)) %>% 
+  ggplot(mapping = aes(x = year, y = mean_weight, colour = species))+
+  geom_line()+
+  theme_bw()
+yearly_weight
 
 
 
