@@ -80,7 +80,7 @@ ggplot(data = surveys_complete,
   geom_point(alpha = 0.1)
 
 #-------------
-# challenges 3
+# challenge 3
 
 # challenge 3
 challenge3 <- ggplot(data = surveys_complete,
@@ -89,9 +89,67 @@ challenge3 <- ggplot(data = surveys_complete,
 challenge3
 
 
+#----------
+# boxplots
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = weight))+
+  geom_boxplot()
+
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = weight))+
+  geom_boxplot(alpha = 0) +
+  geom_jitter(alpha = 0.3, colour = "tomato")
+
+
 # challenge 4
 challenge4 <- ggplot(data = surveys_complete,
                      mapping = aes(x = species_id, y = weight))+
-  geom_jitter(alpha = 0.1, aes(colour = plot_type)) +
-  geom_boxplot(aes(colour = plot_type))
+  geom_jitter(alpha = 0.1, colour = "tomato") +
+  geom_boxplot(alpha = 0)
 challenge4
+
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = weight))+
+  geom_jitter(alpha = 0.1, colour = "tomato") +
+  geom_boxplot(alpha = 0)
+
+# challenge 5
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = weight))+
+  geom_jitter(alpha = 0.1, colour = "tomato") +
+  geom_violin()
+
+
+
+# challenge 6
+class(surveys_complete$plot_id)
+
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = hindfoot_length))+
+  geom_jitter(alpha = 0.3, aes(colour = plot_id))+
+  geom_boxplot(alpha = 0)
+
+# to change plot_id to a factor you need to assign it
+surveys_complete$plot_id <- as.factor(surveys_complete$plot_id)
+
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = hindfoot_length))+
+  geom_jitter(alpha = 0.3, aes(colour = plot_id))+
+  geom_boxplot(alpha = 0)
+
+
+# challenge 7
+ggplot(data = surveys_complete,
+       mapping = aes(x = species_id, y = weight)) +
+  geom_jitter(alpha = 0.3, aes(colour = plot_id))+
+  scale_y_log10()
+
+
+# plotting time series data
+
+
+
+
+# challenge 8
+
+             
