@@ -146,10 +146,16 @@ ggplot(data = surveys_complete,
 
 
 # plotting time series data
+yearly_counts <- surveys_complete %>% 
+  count(year, genus)
 
-
+ggplot(data = yearly_counts,
+       mapping = aes(x = year, y = n)) +
+  geom_line()
 
 
 # challenge 8
-
+ggplot(data = yearly_counts,
+       mapping = aes(x = year, y = n, group = genus)) +
+  geom_line(aes(colour = genus))
              
