@@ -148,14 +148,93 @@ ggplot(data = surveys_complete,
 # plotting time series data
 yearly_counts <- surveys_complete %>% 
   count(year, genus)
+# yearly_counts <- surveys_complete %>% 
+#   count(year, genus, name = "name_of_count")
+
 
 ggplot(data = yearly_counts,
        mapping = aes(x = year, y = n)) +
   geom_line()
 
 
-# challenge 8
 ggplot(data = yearly_counts,
        mapping = aes(x = year, y = n, group = genus)) +
-  geom_line(aes(colour = genus))
+  geom_line()
+
+# challenge 8
+ggplot(data = yearly_counts,
+       mapping = aes(x = year, y = n, colour = genus)) +
+  geom_line()
              
+
+# integrating the pipe operator with ggplot
+yearly_counts_graph <- surveys_complete %>% 
+  count(year, genus) %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = genus))+
+  geom_line()
+# we don't need to tell it what data to use in ggplot line because
+# we piped the data into this function
+
+#---------
+# faceting
+ggplot (data = yearly_counts,
+        mapping = aes(x = year, y = n))+
+  geom_line()+
+  facet_wrap(facets = vars(genus))
+
+ggplot (data = yearly_counts,
+        mapping = aes(x = year, y = n))+
+  geom_line()+
+  facet_wrap(~genus)
+
+
+yearly_sex_counts <- surveys_complete %>% 
+  count(year, genus, sex)
+
+yearly_sex_counts %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = sex))+
+  geom_line()+
+  facet_wrap(facets = vars(genus))
+
+yearly_sex_counts %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = sex))+
+  geom_line()+
+  facet_wrap(facets = vars(genus), ncol = 1)
+
+#can facet by multiple things
+yearly_sex_counts %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = sex))+
+  geom_line()+
+  facet_grid(rows = vars(sex), cols = vars(genus))
+
+yearly_sex_counts %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = sex))+
+  geom_line()+
+  facet_grid(rows = vars(genus))
+
+
+# challenge 9
+yearly_sex_counts %>% 
+  ggplot(mapping = aes(x = year, y = n, colour = sex))+
+  geom_line()+
+  facet_grid(cols = vars(genus))
+
+
+# Challenge 10
+#
+# Put together what you’ve learned to create a plot that depicts how the 
+# average weight of each species changes through the years.
+#
+# Hint: need to do a group_by() and summarize() to get the data
+# before plotting
+
+# average weight on the y axis, year on the x axis
+
+yearly_weight <- surveys_complete %>% 
+  group_by(year, species) %>% 
+  filter(!is.na(weight)) %>% 
+  summarise(mean_weight = mean(weight))
+
+
+
+
