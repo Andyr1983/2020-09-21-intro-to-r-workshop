@@ -64,15 +64,20 @@ challenge2
 #------------------
 # alpha and colours
 
+# if using something outside dataset to colour things, it can go outside aes bracket
 ggplot(data = surveys_complete, 
        mapping = aes(x = weight, y = hindfoot_length)) +
   geom_point(alpha = 0.1, colour = "blue")
 
+# if using something from your dataset to colour things, it needs to go in the aes bracket
 ggplot(data = surveys_complete, 
        mapping = aes(x = weight, y = hindfoot_length)) +
   geom_point(alpha = 0.1, aes(colour = species_id))
 
-
+# could also put the colour in the mapping aes
+ggplot(data = surveys_complete, 
+       mapping = aes(x = weight, y = hindfoot_length, colour = species_id)) +
+  geom_point(alpha = 0.1)
 
 #-------------
 # challenges 3
@@ -80,13 +85,13 @@ ggplot(data = surveys_complete,
 # challenge 3
 challenge3 <- ggplot(data = surveys_complete,
                      mapping = aes(x = species_id, y = weight))+
-  geom_jitter(aes(colour = plot_type))
+  geom_jitter(alpha = 0.2, aes(colour = plot_type))
 challenge3
 
 
 # challenge 4
 challenge4 <- ggplot(data = surveys_complete,
                      mapping = aes(x = species_id, y = weight))+
-  geom_jitter(aes(colour = plot_type, alpha = 0.05)) +
+  geom_jitter(alpha = 0.1, aes(colour = plot_type)) +
   geom_boxplot(aes(colour = plot_type))
 challenge4
